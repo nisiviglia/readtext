@@ -1,0 +1,42 @@
+.controls {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.controls li {
+    float: left;
+    border-right: 1px solid #bbb;
+    width: 49%;
+}
+
+.controls li:first-child {
+    width: 25%;
+}
+
+.controls li:last-child {
+    border-right: None;
+    width: 25%;
+}
+
+.controls li a {
+    display: block;
+    color: white;
+    text-align: center;
+   /* padding: 14px 16px;*/
+    padding: 1em 2em;
+    text-decoration: none;
+}
+
+.controls a:hover {
+    background-color: #111;
+}
+
+.document {
+    margin: auto;
+}
