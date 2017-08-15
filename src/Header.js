@@ -14,7 +14,7 @@ class Header extends Component {
             startStop: "Play",
             textarea: "the quick brown Fox jumps over the lazy Dog.",
             highlightedText: "the quick brown <mark>Fox</mark> jumps over the lazy dog.",
-            style: {height: 80, width: 300}
+            style: {height: 80}
         }
     }
     
@@ -70,7 +70,7 @@ class Header extends Component {
     
     render(props){
         return (
-          <div> 
+          <div className="root"> 
             <ul className="controls">
                 <li><a href="#" onClick={this.resetBtn}>
                     Reset
@@ -94,6 +94,7 @@ class Header extends Component {
                     value={this.state.textarea}
                     onChange={this.handleText}
                     onHeightChange={(height) => this.setHeight(height)}
+                    minRows={3}
                 />
             </div>
           </div>      

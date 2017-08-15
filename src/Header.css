@@ -1,14 +1,24 @@
 @import 
 url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+body {
+    background-color: #fbfbfb;
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .controls {
+    order: 1;
     list-style-type: none;
     margin: 0;
     padding: 0;
     z-index: 3;
     overflow: hidden;
-    background-color: #333;
+    background-color: #109910;
     position: fixed;
     top: 0;
     width: 100%;
@@ -16,7 +26,7 @@ url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 .controls li {
     float: left;
-    border-right: 1px solid #bbb;
+    border-right: 1px solid #18e518;
     width: 49%;
 }
 
@@ -39,7 +49,11 @@ url(https://fonts.googleapis.com/css?family=Open+Sans);
 }
 
 .controls a:hover {
-    background-color: #111;
+    background-color: #15cc15;
+}
+
+.container, .backdrop, .highlights, .textArea {
+    width: 98%;
 }
 
 .highlights, .textArea {
@@ -48,20 +62,19 @@ url(https://fonts.googleapis.com/css?family=Open+Sans);
 }
 
 .container {
+    order: 2;
     display: block;
     margin: 0 auto;
-    transform: translateZ(0);
     -webkit-text-size-adjust: none;
+    padding-top: 4em;
 }
 
 .backdrop {
     position: absolute;
     z-index: 1;
-    border: 2px solid #685972;
     background-color: #fff;
     overflow: auto;
     pointer-events: none;
-    transition: transform 1s;
 }
 
 .highlights {
@@ -71,28 +84,27 @@ url(https://fonts.googleapis.com/css?family=Open+Sans);
 }
 
 .textArea {
-
     display: block;
     position: absolute;
     z-index: 2;
     margin: 0;
-    border: 2px solid #74637f;
+    border: 2px solid transparent;
+    box-shadow: 0 0 5px #d7d7d7;
     border-radius: 0;
     color: #444;
     background-color: transparent;
     overflow: auto;
     resize: none;
-    transition: transform 1s;
 }
 
 .textArea:focus, button:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #c6aada;
+    box-shadow: 0 0 5px #bfbfbf;
 }
 
 mark {
     border-radius: 3px;
     color: transparent;
-    background-color: #f2eb71;
+    background-color: #F4FF2E;
 }
 
