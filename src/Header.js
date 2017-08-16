@@ -12,9 +12,8 @@ class Header extends Component {
         
         this.state = {
             startStop: "Play",
-            textarea: "the quick brown Fox jumps over the lazy Dog.",
+            textarea: "The quick brown fox jumps over the lazy dog.",
             highlightedText: null, 
-            highlightIndices: [],
             style: {height: 80}
         }
     }
@@ -30,25 +29,29 @@ class Header extends Component {
             textarea: event.target.value
         });
     }
-   //pass single index to this function. dont keep list just add to highlightedText. 
-   //that way you can get rid of for loop and state stuff. more simple.
-    highlightText() {
-        const CHAR_COUNT = 10;
-        let indices = this.state.highlightIndices;
-        let text = this.state.textarea;
-        for (let i=0; i < indices.length; i++){
-            let offset = 13 * i; //every pass a <mark></mark> is added.
-            text = 
-                text.substr(0, indices[i] + offset)
-                + "<mark>" 
-                + text.substr(indices[i] + offset,  CHAR_COUNT)
-                + "</mark>"
-                + text.substr(indices[i] + offset + CHAR_COUNT);
+
+    highlightText(index) {
+        const CHAR_COUNT = 15;
+        let text = null;
+        if(this.state.highlightedText){
+            text = this.state.highlightedText
+        } 
+        else {
+            text = this.state.textarea;
         }
+        text = 
+            text.substr(0, index)
+            + "<mark>" 
+            + text.substr(index,  CHAR_COUNT)
+            + "</mark>"
+            + text.substr(index + CHAR_COUNT);
         return text;
     }
 
     highlightBtn(event){
+        if(speechSynthesis.paused){
+            return;
+        }
         let index = null;
         this.msg.onpause = function(event) {
             index = event.charIndex;        
@@ -58,8 +61,7 @@ class Header extends Component {
         speechSynthesis.resume();
 
         this.setState({
-            highlightIndices: this.state.highlightIndices.push(index),
-            highlightedText: this.highlightText(event.target.value)
+            highlightedText: this.highlightText(index)
         });
     }
 
