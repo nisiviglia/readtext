@@ -14,8 +14,10 @@ class Header extends Component {
             startStop: "Play",
             textarea: "The quick brown fox jumps over the lazy dog.",
             highlightedText: null, 
+            highlightCount: 0,
             style: {height: 80}
         }
+        this.__highlightCount = 0;
     }
     
     setHeight(height) {
@@ -31,12 +33,17 @@ class Header extends Component {
     }
 
     highlightText(index) {
-        const CHAR_COUNT = 15;
+        const CHAR_COUNT = 25;
+        //Every highlight adds <mark></mark> to the text.
+        //On top of this ive subtracted half of CHAR_COUNT for better position.
+        //Taking into account of these to items increases accuracy.
+        index += (13 * this.__highlightCount) - (CHAR_COUNT / 2); 
+        this.__highlightCount += 1;
         let text = null;
         if(this.state.highlightedText){
             text = this.state.highlightedText
         } 
-        else {
+        else{
             text = this.state.textarea;
         }
         text = 
@@ -49,17 +56,15 @@ class Header extends Component {
     }
 
     highlightBtn(event){
-        if(speechSynthesis.paused){
+        if(speechSynthesis.paused || speechSynthesis.speaking === false){
             return;
         }
         let index = null;
         this.msg.onpause = function(event) {
             index = event.charIndex;        
         }
-
         speechSynthesis.pause();
         speechSynthesis.resume();
-
         this.setState({
             highlightedText: this.highlightText(index)
         });
@@ -86,8 +91,8 @@ class Header extends Component {
         this.setState({
             startStop: "Play",
             highlightedText: null,
-            highlightIndices: []
         }); 
+        this.__highlightCount = 0;
         speechSynthesis.cancel();
         this.msg = new SpeechSynthesisUtterance();
     }
