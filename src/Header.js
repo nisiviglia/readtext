@@ -13,7 +13,8 @@ class Header extends Component {
         this.state = {
             startStop: "Play",
             textarea: "the quick brown Fox jumps over the lazy Dog.",
-            highlightedText: "the quick brown <mark>Fox</mark> jumps over the lazy dog.",
+            highlightedText: null, 
+            highlightIndices: [],
             style: {height: 80}
         }
     }
@@ -23,23 +24,43 @@ class Header extends Component {
         newState.height = height;
         this.setState({style: newState})
     }
-    
-    highlightText(text) {
-        text = text 
-            .replace(/\n$/g, '\n\n')
-            .replace(/[A-Z].*?\b/g, '<mark>$&</mark>');
-        return text;
-    }
 
     handleText(event) {
         this.setState({
-            textarea: event.target.value,
-            highlightedText: this.highlightText(event.target.value)
+            textarea: event.target.value
         });
+    }
+   //pass single index to this function. dont keep list just add to highlightedText. 
+   //that way you can get rid of for loop and state stuff. more simple.
+    highlightText() {
+        const CHAR_COUNT = 10;
+        let indices = this.state.highlightIndices;
+        let text = this.state.textarea;
+        for (let i=0; i < indices.length; i++){
+            let offset = 13 * i; //every pass a <mark></mark> is added.
+            text = 
+                text.substr(0, indices[i] + offset)
+                + "<mark>" 
+                + text.substr(indices[i] + offset,  CHAR_COUNT)
+                + "</mark>"
+                + text.substr(indices[i] + offset + CHAR_COUNT);
+        }
+        return text;
     }
 
     highlightBtn(event){
-        console.log("code here") 
+        let index = null;
+        this.msg.onpause = function(event) {
+            index = event.charIndex;        
+        }
+
+        speechSynthesis.pause();
+        speechSynthesis.resume();
+
+        this.setState({
+            highlightIndices: this.state.highlightIndices.push(index),
+            highlightedText: this.highlightText(event.target.value)
+        });
     }
 
     startStopBtn(event) {
@@ -62,7 +83,8 @@ class Header extends Component {
     resetBtn(event){
         this.setState({
             startStop: "Play",
-            highlightedText: null
+            highlightedText: null,
+            highlightIndices: []
         }); 
         speechSynthesis.cancel();
         this.msg = new SpeechSynthesisUtterance();
