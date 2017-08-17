@@ -14,6 +14,7 @@ class Header extends Component {
         this.handleText = this.handleText.bind(this);
         this.hotkeyHandler = this.handleHotkey.bind(this);
         
+        this.__highlightCount = 0;
         this.state = {
             startStop: "Play",
             textarea: "The quick brown fox jumps over the lazy dog.",
@@ -21,7 +22,6 @@ class Header extends Component {
             highlightCount: 0,
             style: {height: 80}
         }
-        this.__highlightCount = 0;
     }
 
     componentDidMount() {
@@ -48,10 +48,10 @@ class Header extends Component {
     }
 
     highlightText(index) {
-        const CHAR_COUNT = 25;
+        const CHAR_COUNT = 35;
         //Every highlight adds <mark></mark> to the text.
         //On top of this ive subtracted half of CHAR_COUNT for better position.
-        //Taking into account of these to items increases accuracy.
+        //Taking into account of these two items increases accuracy.
         index += (13 * this.__highlightCount) - (CHAR_COUNT / 2); 
         this.__highlightCount += 1;
         let text = null;
@@ -147,7 +147,7 @@ class Header extends Component {
                     This application uses the Web Speech API.
                     Becuase this technology specification 
                     has not stabilized usability may be limited.
-                    For the best results use the latest version of 
+                    For the best results please use the latest version of 
                     <a 
                         href="https://www.mozilla.org/en-US/firefox/new/">
                         {'\u0020'}Mozilla Firefox

@@ -1,9 +1,38 @@
+# [ReadText] (http://readmytextto.me) 
+
+ReadText is a React webapp designed to make proofreading text easier.
+
+* **Text-To-Speach** ReadText is built with the latest draft of Web Speech API allowing you to spot grammatical errors much easier as your text is being read to you as opposed to reading.
+
+* **Highlighting** For large sections of text click the highlight button or press the spacebar when you hear something that doesn't sound right. ReadText will highlight that section of text for review. 
+
+* **Edit And Reset** Once you have made corrections after your first listen through press the reset button to remove all highlighting and listen to the text again. 
+
+## Tips
+* Use the spacebar instead of clicking highlight.
+* To highlight a larger section of text click the spacebar repeatedly.
+
+## Known Issues 
+1. It says browser unsupported.
+...Web speech API is a very new thing. Its standard is still in the draft phase as of this writing. Because of this all old browsers don't support the standard and will not work. Please update to the newest version and try again. Best results have been had with Firefox.
+
+2. The highlight button does not work.
+...As stated above this API is still in its draft phase as of this writing and is not fully implemented on all web browsers. As it matures this is expected to change. Please update your browser to the newest version and try again. 
+
+3. The voice sounds all garbled.
+...Different systems support different text-to-speech systems. For Linux try your luck with Festival or Espeak.
+
+## To-Do
+1. Add voice selection, speed, and pitch control.
+
+2. Add the option to translate text. 
+
+3. Unit tests
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
-## Table of Contents
+## Create React App &middot; Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
