@@ -40,7 +40,7 @@ class Header extends Component {
             textarea: event.target.value
         });
     }
-
+    
     setHeight(height) {
         let newState = Object.assign({}, this.state.style);
         newState.height = height;
@@ -140,6 +140,19 @@ class Header extends Component {
                     onHeightChange={(height) => this.setHeight(height)}
                     minRows={3}
                 />
+            </div>
+            <div className="experimental">
+                <h4>This uses experimental technology</h4>
+                <p>
+                    This application uses the Web Speech API.
+                    Becuase this technology specification 
+                    has not stabilized usability may be limited.
+                    For the best results use the latest version of 
+                    <a 
+                        href="https://www.mozilla.org/en-US/firefox/new/">
+                        {'\u0020'}Mozilla Firefox
+                    </a>.
+                </p>
             </div>
             <div className="footer">
                <p>{'\u00A9'} 2017 Nicholas Siviglia</p> 
