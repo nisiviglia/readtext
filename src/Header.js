@@ -141,6 +141,9 @@ class Header extends Component {
                     minRows={3}
                 />
             </div>
+            <div className="footer">
+               <p>{'\u00A9'} 2017 Nicholas Siviglia</p> 
+            </div>
           </div>      
         ); 
     }

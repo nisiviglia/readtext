@@ -115,3 +115,14 @@ mark {
     background-color: #F4FF2E;
 }
 
+.footer{
+    order: 3;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    color: #c8c8c8;
+}
