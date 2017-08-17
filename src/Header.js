@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import hotkey from 'react-hotkey';
 import './Header.css'
+hotkey.activate();
+
 class Header extends Component {
     constructor() {
         super();
         this.msg = new SpeechSynthesisUtterance();
         this.startStopBtn = this.startStopBtn.bind(this); 
         this.resetBtn = this.resetBtn.bind(this);
-        this.highlightBtn = this.highlightBtn.bind(this)
+        this.highlightBtn = this.highlightBtn.bind(this);
         this.handleText = this.handleText.bind(this);
+        this.hotkeyHandler = this.handleHotkey.bind(this);
         
         this.state = {
             startStop: "Play",
@@ -19,17 +23,28 @@ class Header extends Component {
         }
         this.__highlightCount = 0;
     }
+
+    componentDidMount() {
+        hotkey.addHandler(this.hotkeyHandler);
+    }
     
-    setHeight(height) {
-        let newState = Object.assign({}, this.state.style);
-        newState.height = height;
-        this.setState({style: newState})
+    handleHotkey(e) {
+        if(speechSynthesis.paused === false 
+                && speechSynthesis.speaking === true && e.key === " "){
+            this.highlightBtn();
+        }
     }
 
     handleText(event) {
         this.setState({
             textarea: event.target.value
         });
+    }
+
+    setHeight(height) {
+        let newState = Object.assign({}, this.state.style);
+        newState.height = height;
+        this.setState({style: newState})
     }
 
     highlightText(index) {
@@ -105,7 +120,7 @@ class Header extends Component {
                     Reset
                 </a></li>
                 <li><a href="#" onClick={this.highlightBtn}>
-                    Highlight
+                    Highlight <p>(spacebar)</p>
                 </a></li>
                 <li><a href="#" onClick={this.startStopBtn}>
                     {this.state.startStop}

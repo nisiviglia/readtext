@@ -48,6 +48,13 @@ body {
     text-decoration: none;
 }
 
+.controls li a p {
+    display: inline-block;
+    font-size: 12px;
+    color: #57b757;
+    margin: 0px;
+}
+
 .controls a:hover {
     background-color: #15cc15;
 }
