@@ -1,4 +1,4 @@
-# [ReadText] (http://readmytextto.me) 
+# [ReadText](http://readmytextto.me) 
 
 ReadText is a React webapp designed to make proofreading text easier.
 
@@ -14,13 +14,13 @@ ReadText is a React webapp designed to make proofreading text easier.
 
 ## Known Issues 
 1. It says browser unsupported.
-...Web speech API is a very new thing. Its standard is still in the draft phase as of this writing. Because of this all old browsers don't support the standard and will not work. Please update to the newest version and try again. Best results have been had with Firefox.
+   Web speech API is a very new thing. Its standard is still in the draft phase as of this writing. Because of this all old browsers don't support the standard and will not work. Please update to the newest version and try again. Best results have been had with Firefox.
 
 2. The highlight button does not work.
-...As stated above this API is still in its draft phase as of this writing and is not fully implemented on all web browsers. As it matures this is expected to change. Please update your browser to the newest version and try again. 
+   As stated above this API is still in its draft phase as of this writing and is not fully implemented on all web browsers. As it matures this is expected to change. Please update your browser to the newest version and try again. 
 
 3. The voice sounds all garbled.
-...Different systems support different text-to-speech systems. For Linux try your luck with Festival or Espeak.
+   Different systems support different text-to-speech systems. For Linux try your luck with Festival or Espeak.
 
 ## To-Do
 1. Add voice selection, speed, and pitch control.
