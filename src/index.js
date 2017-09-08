@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import Header from './Header';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 if('speechSynthesis' in window){
-    ReactDOM.render(<Header />, document.getElementById('root'));
+    ReactDOM.render(<App />, document.getElementById('root'));
 }
 else{
     ReactDOM.render(

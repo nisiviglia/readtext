@@ -1,24 +1,158 @@
-.App {
-  text-align: center;
+@import 
+url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #fbfbfb;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.controls {
+    order: 1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    z-index: 3;
+    overflow: hidden;
+    background-color: #109910;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
-.App-intro {
-  font-size: large;
+.controls li {
+    float: left;
+    width: 25%;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.controls li:nth-child(2){
+    width: 49%;
+    border-right: 1px solid #18e518;
+    border-left: 1px solid #18e518;
+
 }
+
+.controls li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1em 1em 1em 1em;
+    text-decoration: none;
+}
+
+.controls li a p {
+    display: inline-block;
+    font-size: 12px;
+    color: #57b757;
+    margin: 0px;
+}
+
+.controls a:hover {
+    background-color: #15cc15;
+}
+
+.container, .backdrop, .textArea {
+    width: 98%;
+}
+
+.highlights, .textArea {
+    font: 18px/26px 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+}
+
+.container {
+    order: 2;
+    display: block;
+    margin: 0 auto;
+    -webkit-text-size-adjust: none;
+    padding-top: 4.2em;
+    padding-bottom: 1em;
+}
+
+.backdrop {
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    overflow: auto;
+    pointer-events: none;
+}
+
+.highlights {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: transparent;
+}
+
+.textArea {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    margin: 0;
+    border: 2px solid transparent;
+    box-shadow: 0 0 5px #d7d7d7;
+    border-radius: 0;
+    color: #444;
+    background-color: transparent;
+    overflow: hidden;
+    resize: none;
+}
+
+.textArea:focus, button:focus {
+    outline: none;
+    box-shadow: 0 0 5px #bfbfbf;
+}
+
+mark {
+    border-radius: 3px;
+    color: transparent;
+    background-color: #F4FF2E;
+}
+
+.experimental{
+    order: 3;
+    width: 55%;
+    color: #444;
+    background-color: transparent;
+    border: 2px solid transparent;
+    box-shadow: 0 0 5px #d7d7d7;
+    background-color: #fff;
+    text-align: center;
+    position: absolute;
+    bottom: 2em;
+}
+
+.experimental p{
+    font-size: 12px;
+}
+
+.experimental h4{
+    font-size: 13px;
+}
+
+.experimental a{
+    color: #444;
+}
+
+.footer{
+    order: 4;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #c8c8c8;
+}
+
+@media screen and (max-width: 630px){
+    .experimental{
+        width: 95%;
+    }
+
+} 
