@@ -75,6 +75,14 @@ class App extends Component {
         this.setState({highlightStyle: 'invalidHighlight'})
     }
 
+    resetWithoutHighlightRemoval(event){
+        this.setState({
+            startStop: "Play",
+        }); 
+        speechSynthesis.cancel();
+        this.msg = new SpeechSynthesisUtterance(event);
+    }
+
     highlightBtn(event){
         if(speechSynthesis.paused || speechSynthesis.speaking === false){
             return;
@@ -111,8 +119,9 @@ class App extends Component {
             this.setState({startStop: "Resume"}); 
             speechSynthesis.pause();
         }
+        this.msg.onend = (event) => {this.resetWithoutHighlightRemoval(event);}
     }
-
+    
     resetBtn(event){
         this.setState({
             startStop: "Play",

@@ -1,12 +1,14 @@
 {
   "name": "readtext",
+  "homepage": "readmytextto.me",
   "version": "1.0.0",
   "private": true,
+  "author": "Nicholas Siviglia",
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hotkey": "^0.7.0",
-    "react-scripts": "1.0.10",
+    "react-scripts": "1.0.13",
     "react-textarea-autosize": "^5.1.0"
   },
   "scripts": {
