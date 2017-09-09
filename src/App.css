@@ -156,3 +156,14 @@ mark {
     }
 
 } 
+
+.invalidHighlight{
+    pointer-events: none;
+	background: repeating-linear-gradient(
+	-35deg,
+	#109910,
+	#109910 10px,
+	#27a327 10px,
+	#27a327 13px
+	);
+}

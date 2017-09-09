@@ -20,7 +20,8 @@ class App extends Component {
             textarea: "The quick brown fox jumps over the lazy dog.",
             highlightedText: null, 
             highlightCount: 0,
-            style: {height: 80}
+            highlightStyle: null,
+            containerStyle: {height: 80}
         }
     }
 
@@ -42,9 +43,9 @@ class App extends Component {
     }
     
     setHeight(height) {
-        let newState = Object.assign({}, this.state.style);
+        let newState = Object.assign({}, this.state.containerStyle);
         newState.height = height;
-        this.setState({style: newState})
+        this.setState({containerStyle: newState})
     }
 
     highlightText(index) {
@@ -70,6 +71,10 @@ class App extends Component {
         return text;
     }
 
+    highlightInvalidCharIndex(){
+        this.setState({highlightStyle: 'invalidHighlight'})
+    }
+
     highlightBtn(event){
         if(speechSynthesis.paused || speechSynthesis.speaking === false){
             return;
@@ -80,6 +85,12 @@ class App extends Component {
         }
         speechSynthesis.pause();
         speechSynthesis.resume();
+        //Dont highlight anything if charIndex is broken.
+        // i.e. chrome browser
+        if(index === null){
+            this.highlightInvalidCharIndex();
+            return;
+        }
         this.setState({
             highlightedText: this.highlightText(index)
         });
@@ -119,17 +130,17 @@ class App extends Component {
                 <li><a href="javascript:void()" onClick={this.resetBtn}>
                     Reset
                 </a></li>
-                <li><a href="javascript:void()" onClick={this.highlightBtn}>
+                <li><a href="javascript:void()" className={this.state.highlightStyle} onClick={this.highlightBtn}>
                     Highlight <p>(spacebar)</p>
                 </a></li>
                 <li><a href="javascript:void()" onClick={this.startStopBtn}>
                     {this.state.startStop}
                 </a></li>
             </ul>
-            <div className="container" style={this.state.style}>
-                <div className="backdrop" style={this.state.style}>
+            <div className="container" style={this.state.containerStyle}>
+                <div className="backdrop" style={this.state.containerStyle}>
                     <div className="highlights" 
-                        style={this.state.style}
+                        style={this.state.containerStyle}
                         dangerouslySetInnerHTML={{__html: this.state.highlightedText}}
                     ></div>
                 </div>
