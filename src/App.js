@@ -161,11 +161,23 @@ class App extends Component {
                     minRows={3}
                 />
             </div>
+            <div className="howTo">
+                <h1>How To Use</h1>
+                <h2>Text To Speech</h2>
+                <p>{'\u25B8'} Proofreading by listening to your words, instead of reading, will help you spot grammatical errors you would normally miss.</p>
+                <p>{'\u25B8'} Press play and listen for spelling mistakes, run on sentences, or anything else that does not sound like proper English.</p>
+                <h2>Highlighting</h2>
+                <p>{'\u25B8'} While listening to your sentences, press the spacebar when you hear a grammatical error to highlight it for further review.</p>
+                <p>{'\u25B8'} Press the spacebar consecutively to highlight a larger area.</p>
+                <p>{'\u25B8'} If the highlight button is crossed out after pressing, then that feature may not be supported on your web browser.</p>
+                <h2>Edit And Reset</h2>
+                <p>{'\u25B8'} Once you have made corrections, press the reset button to remove any highlights and then press play to listen again.</p>
+            </div>
             <div className="experimental">
                 <h4>This uses experimental technology</h4>
                 <p>
                     This application uses the Web Speech API.
-                    Becuase this technology specification 
+                    Because this technology specification 
                     has not stabilized usability may be limited.
                     For the best results please use the latest version of 
                     <a 

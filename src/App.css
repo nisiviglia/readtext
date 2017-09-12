@@ -55,6 +55,10 @@ body {
     margin: 0px;
 }
 
+.controls a{
+    text-decoration: bold;
+}
+
 .controls a:hover {
     background-color: #15cc15;
 }
@@ -92,6 +96,7 @@ body {
 }
 
 .textArea {
+    flex-grow: 2;
     display: block;
     position: absolute;
     z-index: 2;
@@ -116,8 +121,35 @@ mark {
     background-color: #F4FF2E;
 }
 
-.experimental{
+.howTo{
     order: 3;
+    width: 75%;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+    margin-bottom: 1em;
+    color: #444;
+    border: 2px solid transparent;
+    box-shadow: 0 0 5px #d7d7d7;
+    background-color: #fff;
+}
+
+.howTo h1{
+    font-size: large;
+    text-decoration: bold;
+    text-align: center;
+}
+
+.howTo h2{
+    font-size: medium;
+}
+
+.howTo p{
+    font-size: small;
+}
+
+.experimental{
+    order: 4;
     width: 55%;
     color: #444;
     background-color: transparent;
@@ -125,16 +157,15 @@ mark {
     box-shadow: 0 0 5px #d7d7d7;
     background-color: #fff;
     text-align: center;
-    position: absolute;
-    bottom: 2em;
-}
-
-.experimental p{
-    font-size: 12px;
+    padding-bottom: 1em;
 }
 
 .experimental h4{
-    font-size: 13px;
+    font-size: medium;
+}
+
+.experimental p{
+    font-size: small;
 }
 
 .experimental a{
@@ -142,8 +173,7 @@ mark {
 }
 
 .footer{
-    order: 4;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     text-align: center;
     font-size: 12px;
@@ -152,6 +182,10 @@ mark {
 
 @media screen and (max-width: 630px){
     .experimental{
+        width: 95%;
+    }
+
+    .howTo{
         width: 95%;
     }
 
