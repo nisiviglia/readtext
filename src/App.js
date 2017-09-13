@@ -131,6 +131,10 @@ class App extends Component {
         speechSynthesis.cancel();
         this.msg = new SpeechSynthesisUtterance();
     }
+
+	supportTheSite(){
+        return {__html: '<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=5b9bcb04-b9bc-4944-a3a2-4ee29dda6de8"></script>'};
+    }
     
     render(props){
         return (
@@ -187,7 +191,7 @@ class App extends Component {
                 </p>
             </div>
             <footer className="footer">
-               <p>{'\u00A9'} 2017 Nicholas Siviglia</p> 
+                <p>{'\u00A9'} 2017 Nicholas Siviglia</p> 
             </footer>
           </div>      
         ); 

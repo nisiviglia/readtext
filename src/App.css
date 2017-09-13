@@ -1,7 +1,7 @@
 @import 
 url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-body {
+html, body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -161,20 +161,28 @@ mark {
 }
 
 .experimental h4{
-    font-size: medium;
+    font-size: 12px;
 }
 
 .experimental p{
-    font-size: small;
+    font-size: 11px;
 }
 
 .experimental a{
     color: #444;
 }
 
+.supportTheSite{ 
+    order: 6;
+    color: #444;
+    border: 2px solid transparent;
+    box-shadow: 0 0 5px #d7d7d7;
+    background-color: #fff;
+}
+
 .footer{
-    position: fixed;
-    bottom: 0;
+    order: 5;
+    margin: 0;
     text-align: center;
     font-size: 12px;
     color: #c8c8c8;
@@ -187,6 +195,8 @@ mark {
 
     .howTo{
         width: 95%;
+        padding-left: 0;
+        padding-right: 0;
     }
 
 } 
