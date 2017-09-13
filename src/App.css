@@ -178,6 +178,8 @@ mark {
     border: 2px solid transparent;
     box-shadow: 0 0 5px #d7d7d7;
     background-color: #fff;
+    max-width: 630px; 
+    margin: 0 auto;
 }
 
 .footer{
