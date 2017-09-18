@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 if('speechSynthesis' in window){
-    ReactDOM.render(<App />, document.getElementById('root'));
+    ReactDOM.render((
+        <BrowserRouter>
+        <Switch>
+            <Route exact path='/' component={App}/>
+            <Route path='/:text' component={App}/>
+        </Switch>
+        </BrowserRouter>
+    ), document.getElementById('root'));
 }
 else{
     ReactDOM.render(

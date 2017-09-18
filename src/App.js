@@ -5,8 +5,8 @@ import './App.css'
 hotkey.activate();
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.msg = new SpeechSynthesisUtterance();
         this.startStopBtn = this.startStopBtn.bind(this); 
         this.resetBtn = this.resetBtn.bind(this);
@@ -25,8 +25,12 @@ class App extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount(props) {
         hotkey.addHandler(this.hotkeyHandler);
+        let urlText = this.props.match.params.text;
+        if(urlText){
+            this.setState({textarea: urlText});
+        }
     }
     
     handleHotkey(e) {
@@ -132,10 +136,6 @@ class App extends Component {
         this.msg = new SpeechSynthesisUtterance();
     }
 
-	supportTheSite(){
-        return {__html: '<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=5b9bcb04-b9bc-4944-a3a2-4ee29dda6de8"></script>'};
-    }
-    
     render(props){
         return (
           <div className="root"> 
