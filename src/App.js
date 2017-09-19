@@ -15,6 +15,7 @@ class App extends Component {
         this.hotkeyHandler = this.handleHotkey.bind(this);
         
         this.__highlightCount = 0;
+        this.__highlightClicked = 0;
         this.state = {
             startStop: "Play",
             textarea: "The quick brown fox jumps over the lazy dog.",
@@ -23,6 +24,7 @@ class App extends Component {
             highlightStyle: null,
             containerStyle: {height: 80}
         }
+
     }
 
     componentDidMount(props) {
@@ -32,7 +34,7 @@ class App extends Component {
             this.setState({textarea: urlText});
         }
     }
-    
+
     handleHotkey(e) {
         if(speechSynthesis.paused === false 
                 && speechSynthesis.speaking === true && e.key === " "){
@@ -53,11 +55,12 @@ class App extends Component {
     }
 
     highlightText(index) {
-        const CHAR_COUNT = 35;
+        const CHAR_HIGHLIGHT_COUNT = 35;
         //Every highlight adds <mark></mark> to the text.
-        //On top of this ive subtracted half of CHAR_COUNT for better position.
+        //On top of this ive subtracted half of CHAR_COUNT and then soome 
+        //for better position.
         //Taking into account of these two items increases accuracy.
-        index += (13 * this.__highlightCount) - (CHAR_COUNT / 2); 
+        index += (13 * this.__highlightCount) - (CHAR_HIGHLIGHT_COUNT / 2) - 8; 
         this.__highlightCount += 1;
         let text = null;
         if(this.state.highlightedText){
@@ -69,9 +72,9 @@ class App extends Component {
         text = 
             text.substr(0, index)
             + "<mark>" 
-            + text.substr(index,  CHAR_COUNT)
+            + text.substr(index,  CHAR_HIGHLIGHT_COUNT)
             + "</mark>"
-            + text.substr(index + CHAR_COUNT);
+            + text.substr(index + CHAR_HIGHLIGHT_COUNT);
         return text;
     }
 
@@ -88,29 +91,16 @@ class App extends Component {
     }
 
     highlightBtn(event){
-        if(speechSynthesis.paused || speechSynthesis.speaking === false){
-            return;
+        if(speechSynthesis.paused === false && speechSynthesis.speaking === true){
+            console.log("here");
+            this.__highlightClicked = 1;
         }
-        let index = null;
-        this.msg.onpause = function(event) {
-            index = event.charIndex;        
-        }
-        speechSynthesis.pause();
-        speechSynthesis.resume();
-        //Dont highlight anything if charIndex is broken.
-        // i.e. chrome browser
-        if(index === null){
-            this.highlightInvalidCharIndex();
-            return;
-        }
-        this.setState({
-            highlightedText: this.highlightText(index)
-        });
     }
 
     startStopBtn(event) {
         if(speechSynthesis.paused === false 
                 && speechSynthesis.speaking === false){
+            this.__highlightClicked = 0;
             this.setState({startStop: "Pause"}); 
             this.msg.text = this.state.textarea;
             speechSynthesis.speak(this.msg);
@@ -124,6 +114,12 @@ class App extends Component {
             speechSynthesis.pause();
         }
         this.msg.onend = (event) => {this.resetWithoutHighlightRemoval(event);}
+        this.msg.onboundary = (event) => {
+            if(this.__highlightClicked === 1){
+                this.setState({highlightedText: this.highlightText(event.charIndex)});
+                this.__highlightClicked = 0;
+            }
+        }
     }
     
     resetBtn(event){
@@ -132,6 +128,7 @@ class App extends Component {
             highlightedText: null,
         }); 
         this.__highlightCount = 0;
+        this.__highlightClicked = 0;
         speechSynthesis.cancel();
         this.msg = new SpeechSynthesisUtterance();
     }
