@@ -13,6 +13,7 @@ class App extends Component {
         this.resetBtn = this.resetBtn.bind(this);
         this.highlightBtn = this.highlightBtn.bind(this);
         this.handleText = this.handleText.bind(this);
+        this.textToUrl = this.textToUrl.bind(this);
         this.hotkeyHandler = this.handleHotkey.bind(this);
         
         this.__highlightCount = 0;
@@ -25,22 +26,22 @@ class App extends Component {
             highlightStyle: null,
             containerStyle: {height: 80}
         }
-
     }
 
     componentDidMount(props) {
         hotkey.addHandler(this.hotkeyHandler);
-        let urlShare = this.props.match.params.share;
-        if(urlShare){
-            this.urlToText(urlShare);
+        let inUrl = this.props.match.params.share;
+        if(inUrl){
+            this.urlToText(inUrl);
         }
-        let urlText = this.props.match.params.text;
-        if(urlText){
-            this.setState({textarea: urlText});
+        let inText = this.props.match.params.text;
+        if(inText){
+            this.setState({textarea: inText});
         }
     }
 
     handleHotkey(e) {
+        e.preventDefault();
         if(speechSynthesis.paused === false 
                 && speechSynthesis.speaking === true && e.key === " "){
             this.highlightBtn();
@@ -53,6 +54,16 @@ class App extends Component {
         })
         .catch((err) => {
             console.log(err);
+        });
+    }
+
+    textToUrl(event){
+        api.textToUrl(this.state.textarea).then(outUrl => {
+            console.log("here");
+            console.log(outUrl);
+        })
+        .catch((err) => {
+            console.log(err); 
         });
     }
 
@@ -106,7 +117,6 @@ class App extends Component {
 
     highlightBtn(event){
         if(speechSynthesis.paused === false && speechSynthesis.speaking === true){
-            console.log("here");
             this.__highlightClicked = 1;
         }
     }
@@ -189,17 +199,10 @@ class App extends Component {
                 <p>{'\u25B8'} Once you have made corrections, press the reset button to remove any highlights and then press play to listen again.</p>
             </div>
             <div className="shareUrl">
-                <h4>Share Page</h4>
-                <p>
-                    This application uses the Web Speech API.
-                    Because this technology specification 
-                    has not stabilized usability may be limited.
-                    For the best results please use the latest version of 
-                    <a 
-                        href="https://www.mozilla.org/en-US/firefox/new/">
-                        {'\u0020'}Mozilla Firefox
-                    </a>.
-                </p>
+                <h4>Share Text</h4>
+                <a href="javascript:void()" onClick={this.textToUrl}>
+                    click for url
+                </a>
             </div>
             <footer className="footer">
                 <p>{'\u00A9'} 2017 Nicholas Siviglia</p> 
