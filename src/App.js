@@ -3,7 +3,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import hotkey from 'react-hotkey';
 import * as api from './Api.js';
 import './App.css'
-hotkey.activate();
+hotkey.activate('keydown');
 
 class App extends Component {
     constructor(props) {
@@ -41,9 +41,9 @@ class App extends Component {
     }
 
     handleHotkey(e) {
-        e.preventDefault();
         if(speechSynthesis.paused === false 
                 && speechSynthesis.speaking === true && e.key === " "){
+            e.preventDefault();
             this.highlightBtn();
         }
     }

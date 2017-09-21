@@ -1,6 +1,6 @@
 //https://developers.google.com/url-shortener/v1/getting_started
 
-const MY_BASE_URL = "http://readmytextto.me/";
+const MY_BASE_URL = "https://readmytextto.me/";
 const MY_SHARE_URL = "https://readmytextto.me/share/"
 const GOOGLE_BASE_URL = "https://goo.gl/";
 const EXPAND_URL = "https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/";
