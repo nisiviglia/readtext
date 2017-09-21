@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import ReCAPTCHA from 'react-google-recaptcha';
 import hotkey from 'react-hotkey';
 import * as api from './Api.js';
 import './App.css'
@@ -23,8 +24,9 @@ class App extends Component {
             textarea: "The quick brown fox jumps over the lazy dog.",
             highlightedText: null, 
             highlightCount: 0,
-            highlightStyle: null,
-            containerStyle: {height: 80}
+            containerStyle: {height: 80},
+            shareUrlTrigger: 'blocked',
+            shareUrl: null
         }
     }
 
@@ -48,6 +50,26 @@ class App extends Component {
         }
     }
 
+    shareUrl(){
+        if(this.state.shareUrlTrigger=== "blocked" && this.state.shareUrl === null){
+            return(
+                <a id='blocked' href="javascript:void()">
+                    click for url
+                </a>
+        )}
+        if(this.state.shareUrlTrigger=== "enabled" && this.state.shareUrl === null){
+            return(
+                <a id='enabled' href="javascript:void()" onClick={this.textToUrl}>
+                    click for url
+                </a>
+        )}
+        return(
+            <p id='finished'>
+                {this.state.shareUrl} 
+            </p>
+        )
+    }
+
     urlToText(inUrl){
         api.urlToText(inUrl).then(outText => {
             this.setState({textarea: outText});
@@ -59,8 +81,7 @@ class App extends Component {
 
     textToUrl(event){
         api.textToUrl(this.state.textarea).then(outUrl => {
-            console.log("here");
-            console.log(outUrl);
+            this.setState({shareUrl: outUrl})
         })
         .catch((err) => {
             console.log(err); 
@@ -101,10 +122,6 @@ class App extends Component {
             + "</mark>"
             + text.substr(index + CHAR_HIGHLIGHT_COUNT);
         return text;
-    }
-
-    highlightInvalidCharIndex(){
-        this.setState({highlightStyle: 'invalidHighlight'})
     }
 
     resetWithoutHighlightRemoval(event){
@@ -200,9 +217,20 @@ class App extends Component {
             </div>
             <div className="shareUrl">
                 <h4>Share Text</h4>
-                <a href="javascript:void()" onClick={this.textToUrl}>
-                    click for url
-                </a>
+                <div className="shareUrlBox">
+                    {this.shareUrl()}
+                    <ReCAPTCHA 
+                        ref="recaptcha"
+                        sitekey="6LdPdzEUAAAAAKqvQITb2HC-yZ0bs4CvSOVZ-0uU"
+                        onChange={() => {
+                            this.setState({shareUrlTrigger: 'enabled'});
+                        }}
+                        onExpired={() => {
+                            this.setState({shareUrlTrigger: 'blocked'});
+                        }}
+                        id="recaptcha"
+                    />
+                </div>
             </div>
             <footer className="footer">
                 <p>{'\u00A9'} 2017 Nicholas Siviglia</p> 

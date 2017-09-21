@@ -152,7 +152,7 @@ mark {
 
 .shareUrl{
     order: 4;
-    width: 55%;
+    width: 45%;
     color: #444;
     background-color: transparent;
     border: 2px solid transparent;
@@ -166,12 +166,55 @@ mark {
     font-size: 12px;
 }
 
-.shareUrl p{
-    font-size: 11px;
+.shareUrlBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    overflow: none;
 }
 
-.shareUrl a{
-    color: #444;
+.shareUrl #enabled{
+    display: block;
+    text-align: center;
+    width: 199px;
+    padding: 1em; 
+    text-decoration: none;
+    background-color: #27a327;
+    color: white;
+}
+
+.shareUrl #blocked{
+    display: block;
+    text-align: center;
+    width: 199px;
+    padding: 1em; 
+    text-decoration: none;
+    color: white;
+	background: repeating-linear-gradient(
+	-35deg,
+	#109910,
+	#109910 10px,
+	#27a327 10px,
+	#27a327 13px
+	);
+}
+
+.shareUrl #finished{
+    display: block;
+    text-align: center;
+    padding: 1em; 
+    text-decoration: none;
+    font-family: "Courier New";
+    text-shadow: 0 0 1px white;
+    background-color: #27a327;
+    color: white;
+}
+
+#recaptcha{
+    text-align: center;
+    transform: scale(0.77);
 }
 
 .supportTheSite{ 
@@ -193,8 +236,8 @@ mark {
 }
 
 @media screen and (max-width: 630px){
-    .experimental{
-        width: 95%;
+    .shareUrl{
+        width: 82%;
     }
 
     .howTo{
@@ -205,13 +248,3 @@ mark {
 
 } 
 
-.invalidHighlight{
-    pointer-events: none;
-	background: repeating-linear-gradient(
-	-35deg,
-	#109910,
-	#109910 10px,
-	#27a327 10px,
-	#27a327 13px
-	);
-}
