@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import hotkey from 'react-hotkey';
+import * as api from './Api.js';
 import './App.css'
 hotkey.activate();
 
@@ -29,6 +30,10 @@ class App extends Component {
 
     componentDidMount(props) {
         hotkey.addHandler(this.hotkeyHandler);
+        let urlShare = this.props.match.params.share;
+        if(urlShare){
+            this.urlToText(urlShare);
+        }
         let urlText = this.props.match.params.text;
         if(urlText){
             this.setState({textarea: urlText});
@@ -40,6 +45,15 @@ class App extends Component {
                 && speechSynthesis.speaking === true && e.key === " "){
             this.highlightBtn();
         }
+    }
+
+    urlToText(inUrl){
+        api.urlToText(inUrl).then(outText => {
+            this.setState({textarea: outText});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     }
 
     handleText(event) {
@@ -174,8 +188,8 @@ class App extends Component {
                 <h2>Edit And Reset</h2>
                 <p>{'\u25B8'} Once you have made corrections, press the reset button to remove any highlights and then press play to listen again.</p>
             </div>
-            <div className="experimental">
-                <h4>This uses experimental technology</h4>
+            <div className="shareUrl">
+                <h4>Share Page</h4>
                 <p>
                     This application uses the Web Speech API.
                     Because this technology specification 

@@ -9,6 +9,7 @@ if('speechSynthesis' in window){
         <BrowserRouter>
         <Switch>
             <Route exact path='/' component={App}/>
+            <Route path='/share/:share' component={App}/>
             <Route path='/:text' component={App}/>
         </Switch>
         </BrowserRouter>

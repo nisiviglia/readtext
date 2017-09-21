@@ -150,7 +150,7 @@ mark {
     font-size: small;
 }
 
-.experimental{
+.shareUrl{
     order: 4;
     width: 55%;
     color: #444;
@@ -162,15 +162,15 @@ mark {
     padding-bottom: 1em;
 }
 
-.experimental h4{
+.shareUrl h4{
     font-size: 12px;
 }
 
-.experimental p{
+.shareUrl p{
     font-size: 11px;
 }
 
-.experimental a{
+.shareUrl a{
     color: #444;
 }
 
